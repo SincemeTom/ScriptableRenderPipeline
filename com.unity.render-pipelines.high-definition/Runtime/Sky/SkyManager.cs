@@ -504,7 +504,8 @@ namespace UnityEngine.Rendering.HighDefinition
                     // Then copy it to the cubemap array slice
                     for (int i = 0; i < 6; ++i)
                     {
-                        m_BuiltinParameters.commandBuffer.CopyTexture(m_SkyboxBSDFCubemapIntermediate, i, renderingContext.skyboxBSDFCubemapArray, 6 * bsdfIdx + i);
+                        for (int mip = 0; mip < (int)EnvConstants.ConvolutionMipCount; ++mip)
+                            m_BuiltinParameters.commandBuffer.CopyTexture(m_SkyboxBSDFCubemapIntermediate, i, mip, renderingContext.skyboxBSDFCubemapArray, 6 * bsdfIdx + i, mip);
                     }
                 }
             }
@@ -797,10 +798,6 @@ namespace UnityEngine.Rendering.HighDefinition
 
             var reflectionTexture = GetReflectionTexture(hdCamera.lightingSky);
             cmd.SetGlobalTexture(HDShaderIDs._SkyTexture, reflectionTexture);
-            float initialMipCount = Mathf.Log((float)reflectionTexture.width, 2.0f) + 1;
-            // The last 3 mips are never filled so for smaller textures, 6 is not enough.
-            float mipCount = Mathf.Clamp(initialMipCount, 0.0f, Mathf.Min(initialMipCount - 3.0f, 6.0f));
-            cmd.SetGlobalFloat(HDShaderIDs._SkyTextureMipCount, mipCount);
 
             if (IsLightingSkyValid(hdCamera))
             {
