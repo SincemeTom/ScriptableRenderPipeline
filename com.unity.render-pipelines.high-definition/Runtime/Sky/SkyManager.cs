@@ -504,8 +504,7 @@ namespace UnityEngine.Rendering.HighDefinition
                     // Then copy it to the cubemap array slice
                     for (int i = 0; i < 6; ++i)
                     {
-                        for (int mip = 0; mip < (int)EnvConstants.ConvolutionMipCount; ++mip)
-                            m_BuiltinParameters.commandBuffer.CopyTexture(m_SkyboxBSDFCubemapIntermediate, i, mip, renderingContext.skyboxBSDFCubemapArray, 6 * bsdfIdx + i, mip);
+                        m_BuiltinParameters.commandBuffer.CopyTexture(m_SkyboxBSDFCubemapIntermediate, i, renderingContext.skyboxBSDFCubemapArray, 6 * bsdfIdx + i);
                     }
                 }
             }
