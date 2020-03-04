@@ -199,7 +199,7 @@ namespace UnityEngine.Rendering.HighDefinition
         [SerializeField, FormerlySerializedAs("lightDimmer")]
         float m_LightDimmer = 1.0f;
         /// <summary>
-        /// Get/Set the light intensity multiplier, between 0 and 16. 
+        /// Get/Set the light dimmer / multiplier, between 0 and 16. 
         /// </summary>
         public float lightDimmer
         {
@@ -216,7 +216,7 @@ namespace UnityEngine.Rendering.HighDefinition
         [Range(0.0f, 16.0f), SerializeField, FormerlySerializedAs("volumetricDimmer")]
         float m_VolumetricDimmer = 1.0f;
         /// <summary>
-        /// Get/Set the light multiplier on volumetric effects, between 0 and 16.
+        /// Get/Set the light dimmer / multiplier on volumetric effects, between 0 and 16.
         /// </summary>
         public float volumetricDimmer
         {

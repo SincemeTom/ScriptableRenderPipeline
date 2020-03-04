@@ -506,6 +506,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Transform result from CIE XYZ to sRGB color space in EvalSensitivity for iridescence.
 - Moved BeginCameraRendering callback right before culling.
 - Renamed the cubemap used for diffuse convolution to a more explicit name for the memory profiler.
+- Light dimmer can now get values higher than one and was renamed to multiplier in the UI. 
 
 ## [7.1.1] - 2019-09-05
 
