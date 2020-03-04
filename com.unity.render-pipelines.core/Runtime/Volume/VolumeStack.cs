@@ -59,11 +59,17 @@ namespace UnityEngine.Rendering
             return comp;
         }
 
-        /// <inheritdoc cref="IDisposable.Dispose"/>
+        /// <summary>
+        /// Cleans up the content of this stack. Once a <c>VolumeStack</c> is disposed, it souldn't
+        /// be used anymore.
+        /// </summary>
         public void Dispose()
         {
             foreach (var component in components)
+            {
+                component.Value.Release();
                 CoreUtils.Destroy(component.Value);
+            }
 
             components.Clear();
         }

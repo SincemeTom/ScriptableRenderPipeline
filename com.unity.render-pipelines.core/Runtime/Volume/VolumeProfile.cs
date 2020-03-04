@@ -15,9 +15,12 @@ namespace UnityEngine.Rendering
         /// </summary>
         public List<VolumeComponent> components = new List<VolumeComponent>();
 
-        // Editor only, doesn't have any use outside of it
+        /// <summary>
+        /// A dirty check used to redraw the profile inspector when something has changed. This is
+        /// currently only used in the editor.
+        /// </summary>
         [NonSerialized]
-        public bool isDirty = true;
+        public bool isDirty = true; // Editor only, doesn't have any use outside of it
 
         void OnEnable()
         {
@@ -27,6 +30,12 @@ namespace UnityEngine.Rendering
             // harmless and happens because Unity does a redraw of the editor (and thus the current
             // frame) before the recompilation step.
             components.RemoveAll(x => x == null);
+        }
+
+        void OnDestroy()
+        {
+            foreach (var component in components)
+                component.Release();
         }
 
         /// <summary>
@@ -115,6 +124,7 @@ namespace UnityEngine.Rendering
 
             if (toRemove >= 0)
             {
+                components[toRemove].Release();
                 components.RemoveAt(toRemove);
                 isDirty = true;
             }
