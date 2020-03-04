@@ -2858,6 +2858,15 @@ namespace UnityEngine.Rendering.HighDefinition
             }
         }
 
+#if UNITY_EDITOR
+        /// <summary> [Editor Only] Set the lightmap bake type. </summary>
+        public LightmapBakeType lightmapBakeType
+        {
+            get => legacyLight.lightmapBakeType;
+            set => legacyLight.lightmapBakeType = value;
+        }
+#endif
+
 #endregion
 
         /// <summary>
