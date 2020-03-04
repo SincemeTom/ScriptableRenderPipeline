@@ -2357,6 +2357,15 @@ namespace UnityEngine.Rendering.HighDefinition
             legacyLight.SetLightDirty(); // Should be apply only to parameter that's affect GI, but make the code cleaner
 #endif
         }
+        
+        void Awake()
+        {
+            Migrate();
+
+            // We need to reconstruct the emissive mesh at Light creation if needed due to not beeing able to change hierarchy in prefab asset.
+            // This is especially true at Tuntime as there is no code path that will trigger the rebuild of emissive mesh until one of the property modifying it is changed.
+            UpdateAreaLightEmissiveMesh();
+        }
 
         internal void UpdateAreaLightEmissiveMesh(bool fromTimeLine = false)
         {

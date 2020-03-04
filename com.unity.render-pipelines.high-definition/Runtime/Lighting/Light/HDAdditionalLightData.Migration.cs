@@ -163,8 +163,6 @@ namespace UnityEngine.Rendering.HighDefinition
                         data.m_AreaLightEmissiveMeshShadowCastingMode = oldShadowCastingMode;
                         data.m_AreaLightEmissiveMeshMotionVectorGenerationMode = oldMotionVectorMode;
                     }
-
-                    data.UpdateAreaLightEmissiveMesh();
                 })
             );
 #pragma warning restore 0618, 0612
@@ -195,8 +193,6 @@ namespace UnityEngine.Rendering.HighDefinition
             // OnValidate might be called before migration but migration is needed to call UpdateBounds() properly so we call it again here to make sure that they are updated properly.
             OnValidate();
         }
-
-        void Awake() => Migrate();
 
         #region Obsolete fields
         // To be able to have correct default values for our lights and to also control the conversion of intensity from the light editor (so it is compatible with GI)
