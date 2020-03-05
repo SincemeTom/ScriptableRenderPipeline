@@ -384,7 +384,10 @@ namespace UnityEditor.ShaderGraph.Drawing
             foreach (MaterialNodeView selectedNode in selection.Where(x => x is MaterialNodeView).Select(x => x as MaterialNodeView))
             {
                 if (selectedNode.CanToggleNodeExpanded() && selectedNode.expanded != state)
+                {
                     selectedNode.expanded = state;
+                    selectedNode.node.Dirty(ModificationScope.Topological);
+                }
             }
         }
 
@@ -828,6 +831,17 @@ namespace UnityEditor.ShaderGraph.Drawing
                 {
                     case AbstractShaderProperty property:
                     {
+                        // This could be from another graph, in which case we add a copy of the ShaderInput to this graph.
+                        if (graph.properties.FirstOrDefault(p => p.guid == property.guid) == null)
+                        {
+                            var copy = (AbstractShaderProperty)property.Copy();
+                            graph.SanitizeGraphInputName(copy);
+                            graph.SanitizeGraphInputReferenceName(copy, property.overrideReferenceName); // We do want to copy the overrideReferenceName
+
+                            property = copy;
+                            graph.AddGraphInput(property);
+                        }
+
                         var node = new PropertyNode();
                         var drawState = node.drawState;
                         drawState.position =  new Rect(nodePosition, drawState.position.size);
@@ -840,6 +854,17 @@ namespace UnityEditor.ShaderGraph.Drawing
                     }
                     case ShaderKeyword keyword:
                     {
+                        // This could be from another graph, in which case we add a copy of the ShaderInput to this graph.
+                        if (graph.keywords.FirstOrDefault(k => k.guid == keyword.guid) == null)
+                        {
+                            var copy = (ShaderKeyword)keyword.Copy();
+                            graph.SanitizeGraphInputName(copy);
+                            graph.SanitizeGraphInputReferenceName(copy, keyword.overrideReferenceName); // We do want to copy the overrideReferenceName
+
+                            keyword = copy;
+                            graph.AddGraphInput(keyword);
+                        }
+
                         var node = new KeywordNode();
                         var drawState = node.drawState;
                         drawState.position =  new Rect(nodePosition, drawState.position.size);
