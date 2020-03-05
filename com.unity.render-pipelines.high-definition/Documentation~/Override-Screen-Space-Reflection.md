@@ -1,6 +1,6 @@
 # Screen Space Reflection
 
-The **Screen Space Reflection** (SSR) override is a High Definition Render Pipeline (HDRP) feature that uses the depth and color buffer of the screen to calculate reflections. For information about how SSR works in HDRP, see the [Reflection documentation](Reflection-in-HDRP.md#ScreenSpaceReflection).
+The **Screen Space Reflection** (SSR) override is a High Definition Render Pipeline (HDRP) feature that uses the depth and color buffer of the screen to calculate reflections. For information about how SSR works in HDRP, see the [reflection documentation](Reflection-in-HDRP.md#ScreenSpaceReflection).
 
 ## Using Screen Space Reflection
 
