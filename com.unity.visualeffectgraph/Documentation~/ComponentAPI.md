@@ -45,14 +45,14 @@ You can change the default Event in the following ways:
 
 * On the [Visual Effect Inspector](VisualEffectComponent.md), change the **Initial Event Name** field.
 * In the component API : `initialEventName = "MyEventName";`.
-* In the component API : `initialEventID = Shader.PropertyToID("MyEventName";`.
+* In the component API : `initialEventID = Shader.PropertyToID("MyEventName");`.
 * Using the [ExposedProperty Helper Class](ExposedPropertyHelper.md).
 
 ## Random seed control
 
 Every effect instance has settings and controls for its random seed. You can modify the seed to influence the random values the Visual Effect Graph uses.
 
-* `resetSeedOnPlay = true/false`: Controls whether Unity computes a new random seed every time you call the `Play()` function. This causes each random value the Visual Effect Graph uses to be different to what it was in previous simulations.
+* `resetSeedOnPlay = true/false`: Controls whether Unity computes a new random seed every time you call the `ReInit()` function. This causes each random value the Visual Effect Graph uses to be different to what it was in previous simulations.
 * `startSeed = intSeed`: Sets a manual seed that the **Random Number** Operator uses to create random values for this Visual Effect. Unity ignores this value if `resetSeedOnPlay` is set to `true`.
 
 <a name="PropertyInterface"></a>
@@ -151,7 +151,7 @@ Event Attributes are [Attributes](Attributes.md) that attach to [Events](Events.
 
 #### Creating Event Attributes
 
-To create a `VFXEventAttribute`, use the `CreateVFXEventAttribute()` method of the Visual Effect component. If you want to send the same Event multiple times with the same attributes, you should store the `VFXEventAtrribute`, rather than create a new one every time you send the Event.
+To create a `VFXEventAttribute`, use the `CreateVFXEventAttribute()` method of the Visual Effect component. If you want to send the same Event multiple times with the same attributes, you should store the `VFXEventAtrribute`, rather than create a new one every time you send the Event. When you send an Event to a Visual Effect Graph, Unity creates a copy of the EventAttribute in its current state and sends the copy. This means that, after you send the Event, you can safely modify the EventAttribute without affecting the information sent to the Visual Effect Graph.
 
 #### Setting the Attribute's payload
 
@@ -159,7 +159,7 @@ After you create an Event Attribute, you use API similar to the Has/Get/Set prop
 
 * Has : `HasBool`, `HasVector3`, `HasFloat`,... To check if an Attribute exists.
 * Get : `GetBool`, `GetVector3`, `GetFloat`,... To get the value of an Attribute.
-* Set: `SetBool`, `SetVector3`, `SetFloat`,... To set the value of an Attribute.
+* Set : `SetBool`, `SetVector3`, `SetFloat`,... To set the value of an Attribute.
 
 For the full Attribute API documentation, see [VFXEventAttribute](https://docs.unity3d.com/Documentation/ScriptReference/VFX.VFXEventAttribute.html) in the Unity Script Reference.
 
