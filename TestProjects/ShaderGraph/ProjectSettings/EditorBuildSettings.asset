@@ -5,37 +5,61 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ArtisticNodes.unity
     guid: ef89632b434b9c644a88f827ec7b029d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ChannelNodes.unity
     guid: cc3d7893409e1a34fa72839a8a0655b8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/InputNodes.unity
     guid: 1c45ab02ee5353c44b809073fe83edf7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LogicNodes.unity
     guid: c9e604cd31ff2454d9cab4e919cae3c1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MathNodes.unity
     guid: a57ba07320e44f145ab52a48fadc4dca
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ProceduralNodes.unity
     guid: 64ece7a4be4f6294bbdc8cad1cf7f71d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/UtilityNodes.unity
     guid: e04b9c7fb71c03448b350d2b652e7301
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/UVNodes.unity
     guid: 6efc74ac9f48a3243a990cf89991972c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TransformNode.unity
     guid: 1dc3dc627ca4fff4ba184eb8f939406b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/NormalMapStressTests.unity
     guid: 8d4f811a4f241464fb438ad434fbaba4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/InstancedRendering.unity
     guid: e2be1657f285b724c8e4fc40a9ab77fd
+  - enabled: 1
+    path: Assets/Scenes/InputNodeBisection/Basic.unity
+    guid: b8f38cc0945227149b9945e51f43bd58
+  - enabled: 1
+    path: Assets/Scenes/InputNodeBisection/Geometry.unity
+    guid: e3fcafff72939e6459d242889342685e
+  - enabled: 1
+    path: Assets/Scenes/InputNodeBisection/Gradient.unity
+    guid: 24d2ac4ff14a2114b8ab18ea796f4081
+  - enabled: 1
+    path: Assets/Scenes/InputNodeBisection/Lighting.unity
+    guid: ac382d5992fb43745a7a7dc3eedc6695
+  - enabled: 1
+    path: Assets/Scenes/InputNodeBisection/Matrix.unity
+    guid: ed4cf202c16e5da49a5fd24d34273c15
+  - enabled: 1
+    path: Assets/Scenes/InputNodeBisection/PBR.unity
+    guid: 2f8ce83126deb534c892b96d6cc5c2cb
+  - enabled: 1
+    path: Assets/Scenes/InputNodeBisection/Scene.unity
+    guid: b197b1c37f3d3f344ac45539d0d41c87
+  - enabled: 1
+    path: Assets/Scenes/InputNodeBisection/Texture.unity
+    guid: 8c72001940e59d443ad7810925fe73a9
   m_configObjects: {}
