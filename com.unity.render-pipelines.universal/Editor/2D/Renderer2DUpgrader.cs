@@ -28,27 +28,43 @@ namespace UnityEditor.Experimental.Rendering.Universal
 
         static void UpgradeGameObject(GameObject go)
         {
-            SpriteRenderer[] spriteRenderers = go.GetComponentsInChildren<SpriteRenderer>(true);
-
-            bool upgraded = false;
-            foreach (SpriteRenderer renderer in spriteRenderers)
+            Renderer[] spriteRenderers = go.GetComponentsInChildren<Renderer>(true);
+            Renderer2DData data = Light2DEditorUtility.GetRenderer2DData();
+            if (data != null)
             {
-                Renderer2DData data = Light2DEditorUtility.GetRenderer2DData();
-                if (data != null)
+                Material defaultMat = data.GetDefaultMaterial(DefaultMaterialType.Sprite);
+
+                bool upgraded = false;
+                foreach (Renderer renderer in spriteRenderers)
                 {
-                    Material defaultMat = data.GetDefaultMaterial(DefaultMaterialType.Sprite);
-                    if (defaultMat != null && renderer.sharedMaterial != null && renderer.sharedMaterial.shader.name == "Sprites/Default")
-                    {
-                        renderer.sharedMaterial = defaultMat;
-                        upgraded = true;
-                    }
-                }
-            }
+                    int materialCount = renderer.sharedMaterials.Length;
+                    Material[] newMaterials = new Material[materialCount];
 
-            if (upgraded)
-            {
-                Debug.Log(go.name + " was upgraded.", go);
-                EditorSceneManager.MarkSceneDirty(go.scene);
+                    for (int i = 0; i < materialCount; i++)
+                    {
+                        Material mat = renderer.sharedMaterials[i];
+
+                        if (mat != null && mat.shader.name == "Sprites/Default")
+                        {
+                            newMaterials[i] = defaultMat;
+                            upgraded = true;
+                        }
+                        else
+                        {
+                            newMaterials[i] = renderer.sharedMaterials[i];
+                        }
+
+                    }
+
+                    if (upgraded)
+                        renderer.sharedMaterials = newMaterials;
+                }
+
+                if (upgraded)
+                {
+                    Debug.Log(go.name + " was upgraded.", go);
+                    EditorSceneManager.MarkSceneDirty(go.scene);
+                }
             }
         }
 
@@ -58,7 +74,8 @@ namespace UnityEditor.Experimental.Rendering.Universal
             if (data != null)
             {
                 Material defaultMat = data.GetDefaultMaterial(DefaultMaterialType.Sprite);
-                if (defaultMat != null && mat != null && mat.shader.name == "Sprites/Default")
+
+                if (mat.shader.name == "Sprites/Default")
                 {
                     mat.shader = defaultMat.shader;
                 }
@@ -87,7 +104,6 @@ namespace UnityEditor.Experimental.Rendering.Universal
             return Light2DEditorUtility.IsUsing2DRenderer();
         }
 
-
         [MenuItem("Edit/Render Pipeline/Universal Render Pipeline/2D Renderer/Upgrade Project to 2D Renderer (Experimental)", false)]
         static void UpgradeProjectTo2DRenderer()
         {
@@ -104,8 +120,5 @@ namespace UnityEditor.Experimental.Rendering.Universal
         {
             return Light2DEditorUtility.IsUsing2DRenderer();
         }
-
-
-         
     }
 }
